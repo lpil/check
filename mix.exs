@@ -38,6 +38,11 @@ defmodule Check.Mixfile do
       # Automatic test runner
       {:mix_test_watch, only: :dev},
 
+      # Erlang quickcheck implementation
+      {:excheck, "~> 0.2", only: :test},
+      # Triqcheck Elixir wrapper
+      {:triq, github: "krestenkrab/triq", only: :test},
+
       # Code linter
       {:dogma, github: "lpil/dogma"},
 
