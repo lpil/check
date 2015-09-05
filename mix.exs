@@ -1,32 +1,52 @@
-defmodule Verify.Mixfile do
+defmodule Check.Mixfile do
   use Mix.Project
 
+  @version "0.0.3"
+
   def project do
-    [app: :verify,
-     version: "0.0.1",
-     elixir: "~> 1.0",
-     build_embedded: Mix.env == :prod,
-     start_permanent: Mix.env == :prod,
-     deps: deps]
+    [
+      app: :check,
+      version: @version,
+      elixir: "~> 1.0",
+      deps: deps,
+      build_embedded: Mix.env == :prod,
+      start_permanent: Mix.env == :prod,
+      test_coverage: [tool: ExCoveralls],
+
+      name: "Check",
+      source_url: "https://github.com/lpil/check",
+      description: "Check yo'self before you wreck yo'self.",
+      package: [
+        contributors: ["Louis Pilfold"],
+        licenses: ["MIT"],
+        links: %{ "GitHub" => "https://github.com/lpil/check" },
+      ]
+    ]
   end
 
-  # Configuration for the OTP application
-  #
-  # Type `mix help compile.app` for more information
   def application do
-    [applications: [:logger]]
+    [
+      applications: [],
+    ]
   end
 
-  # Dependencies can be Hex packages:
-  #
-  #   {:mydep, "~> 0.3.0"}
-  #
-  # Or git/path repositories:
-  #
-  #   {:mydep, git: "https://github.com/elixir-lang/mydep.git", tag: "0.1.0"}
-  #
-  # Type `mix help deps` for more examples and options
+
   defp deps do
-    []
+    [
+      # Test coverage checker
+      {:excoveralls, only: ~w(dev test)a},
+      # Automatic test runner
+      {:mix_test_watch, only: :dev},
+
+      # Code linter
+      {:dogma, github: "lpil/dogma"},
+
+      # Documentation checker
+      {:inch_ex, only: ~w(dev test docs)a},
+      # Markdown processor
+      {:earmark, "~> 0.1", only: :dev},
+      # Documentation generator
+      {:ex_doc, "~> 0.7", only: :dev},
+    ]
   end
 end

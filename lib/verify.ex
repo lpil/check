@@ -1,2 +1,0 @@
-defmodule Verify do
-end
