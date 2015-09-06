@@ -13,7 +13,7 @@ defmodule Check.CheckMacroTest do
     assert context.value == :ok
   end
 
-  check "that we can assign variables", for [x: integer] do
+  check "that we can assign variables", given: [x: integer] do
     assert is_integer x
   end
 

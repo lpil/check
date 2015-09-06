@@ -9,7 +9,7 @@ defmodule Check.CheckMacro do
     end
   end
 
-  defmacro check(desc, {:for, _, _assignments}, [do: body]) do
+  defmacro check(desc, [given: _assignments], [do: body]) do
     vars = quote do
       var!(x) = Check.Generator.integer # TODO: Make this not shit.
     end
