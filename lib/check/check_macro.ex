@@ -11,7 +11,7 @@ defmodule Check.CheckMacro do
 
   defmacro check(desc, [given: _assignments], [do: body]) do
     vars = quote do
-      var!(x) = Check.Generator.integer # TODO: Make this not shit.
+      var!(x) = Check.Domain.integer.generator.() # TODO: Make this not shit.
     end
     quote do
       test unquote(desc) do
