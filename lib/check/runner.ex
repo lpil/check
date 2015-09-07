@@ -24,10 +24,9 @@ defmodule Check.Runner do
   end
 
 
-
   defp realise_assignments(assignments) do
-    Enum.map assignments, fn {id, generator} ->
-      {id, generator.()}
+    Enum.map assignments, fn {id, domain} ->
+      {id, domain.generator.()}
     end
   end
 

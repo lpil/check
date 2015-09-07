@@ -1,7 +1,9 @@
 defmodule Check.RunnerTest do
   use Check.Case
 
+  alias Check.Domain
   alias Check.Runner
+
   import ExUnit.CaptureIO
 
   check "test evalutes given AST" do
@@ -33,7 +35,8 @@ defmodule Check.RunnerTest do
       import ExUnit.Assertions
       assert x == 1
     end
-    assignments = [x: fn -> 1 end]
+    domain = %Domain{ generator: fn -> 1 end }
+    assignments = [x: domain]
     Runner.test( ast, __MODULE__, assignments )
   end
 end
