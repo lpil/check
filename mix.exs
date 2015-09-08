@@ -11,7 +11,7 @@ defmodule Check.Mixfile do
       deps: deps,
       build_embedded: Mix.env == :prod,
       start_permanent: Mix.env == :prod,
-      test_coverage: [tool: ExCoveralls],
+      # test_coverage: [tool: ExCoveralls],
 
       name: "Check",
       source_url: "https://github.com/lpil/check",
@@ -33,8 +33,9 @@ defmodule Check.Mixfile do
 
   defp deps do
     [
-      # Test coverage checker
-      {:excoveralls, only: ~w(dev test)a},
+      # # Test coverage checker
+      # {:excoveralls, only: ~w(dev test)a},
+
       # Automatic test runner
       {:mix_test_watch, only: :dev},
 
@@ -46,8 +47,9 @@ defmodule Check.Mixfile do
       # Code linter
       {:dogma, github: "lpil/dogma"},
 
-      # Documentation checker
-      {:inch_ex, only: ~w(dev test docs)a},
+      # # Documentation checker
+      # {:inch_ex, only: ~w(dev test docs)a},
+
       # Markdown processor
       {:earmark, "~> 0.1", only: :dev},
       # Documentation generator
