@@ -1,5 +1,5 @@
 defmodule Check.Domain.Integer do
-  @doc """
+  @moduledoc """
   Generates a random integer between an optional max and min value.
   """
 

@@ -4,27 +4,30 @@ defmodule Check.CheckMacro do
   """
 
   defmacro check(desc, [do: body]) do
-    quote do
+    quote location: :keep do
       test unquote(desc), do: unquote(body)
     end
   end
 
-  defmacro check(desc, [given: _assignments], [do: body]) do
-    vars = quote do
-      var!(x) = Check.Domain.integer.generator.() # TODO: Make this not shit.
-    end
+  defmacro check(desc, [given: assignments], [do: body]) do
+    scope = __CALLER__.context_modules |> hd
+    body  = {:quote, [], [[do: body]]}
     quote do
       test unquote(desc) do
-        unquote(vars)
-        unquote(body)
+        Check.Runner.test(
+          unquote(body),
+          unquote(scope),
+          unquote(assignments)
+        )
       end
     end
   end
 
   defmacro check(desc, context, [do: body]) do
     quote do
-      test unquote(desc), unquote(context), do: unquote(body)
+      test unquote(desc), unquote(context) do
+        unquote(body)
+      end
     end
   end
-
 end

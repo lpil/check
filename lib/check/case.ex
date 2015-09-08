@@ -21,6 +21,7 @@ defmodule Check.Case do
     quote do
       use ExUnit.Case, unquote(args)
       import Check.CheckMacro
+      import Check.Domain
     end
   end
 end
